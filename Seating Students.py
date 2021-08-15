@@ -36,7 +36,7 @@ def SeatingStudents(arr):
     nested  =[]
     for i in list1:
       if len(nested) !=0:
-        if i %2!=0:
+        if i % 2 != 0:
           nested.append([i])
         else:
           nested[len(nested)-1].append(i)
@@ -62,7 +62,7 @@ def SeatingStudents(arr):
 
       
   else:
-    total_non_rep = arr[0]//2
+    total_non_rep = arr[0] // 2
     odd_rep = total_non_rep - 1
     even_rep = total_non_rep - 1
     return total_non_rep+odd_rep+even_rep 

@@ -14,10 +14,79 @@
 # Input: "1x0 * 12 = 1200"
 # Output: 0
 
-def MissingDigit(strParam):
+def evaluate(unknown, k):
+  if unknown == 'x':
+    return k
 
-  # code goes here
-  return strParam
+  known = str(k)
+
+  if len(unknown) != len(known):
+    return 0
+
+  for i in range(0, len(unknown)):
+    if known[i] != unknown[i]:
+      return known[i]
+  
+  return 0
+def Oposite(sSimbol, a, b):
+  if sSimbol == '+':
+    return a - b
+  if sSimbol == '-':
+    return a + b
+  if sSimbol == '*':
+    return a / b
+  if sSimbol == '/':
+    return a * b
+
+def Onward(sSimbol, a, b):
+  if sSimbol == '+':
+    return a - b
+  if sSimbol == '-':
+    return b - a
+  if sSimbol == '*':
+    return a / b
+  if sSimbol == '/':
+    return b / a
+
+def Normal(sSimbol, a, b):
+  if sSimbol == '+':
+    return a + b
+  if sSimbol == '-':
+    return a - b
+  if sSimbol == '*':
+    return a * b
+  if sSimbol == '/':
+    return a / b
+
+def MissingDigit(strParam):
+  blocks = strParam.split(' ')
+
+  # if 1st operator contains x
+  if 'x' in blocks[0]:
+    return evaluate(blocks[0],
+      Oposite(blocks[1],
+        int(blocks[4]), 
+        int(blocks[2])
+      )
+    )
+
+  # if 2nd operator contains x
+  if 'x' in blocks[2]:
+    return evaluate(blocks[2],
+      Onward(blocks[1],
+        int(blocks[4]), 
+        int(blocks[0])
+      )
+    )
+  
+
+  return evaluate(blocks[4],
+    Normal(blocks[1],
+      int(blocks[0]),
+      int(blocks[2])
+    )
+  )
+
 
 # keep this function call here 
 print(MissingDigit(input()))
