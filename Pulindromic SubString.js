@@ -21,9 +21,64 @@
 function PalindromicSubstring(str) { 
 
   // code goes here  
-  return str; 
+    var beg = 0, end = 0, ind =0;
+    var length = str.length;
+    var longestLength = 0;
+    var longestBeg = 0;
+    var longestEnd = 0;
+    var currentLength = 0;
+    while(ind < length){
+        beg = end = ind;
+        while(true){
+            if(str[ind] === str[end]){
+                end++;
+            }else if(str[ind] === str[beg]){
+                beg--
+            }else{
+                break;
+            }
+            if(beg === -1 && end === length){
+                break;
+            }
+        }
+        beg++;
+        end--;
+        while(true){
+            if(str[beg] === str[end]){
+                beg--; end++;
+            }else{
+                end--;
+                beg++;
+                if(end-beg+1 > longestLength){
+                    longestLength = end-beg+1;
+                    longestBeg = beg;
+                    longestEnd = end+1;
+                }
+                break;
+            }
+            if(beg < 0 || end > length-1){
+                end--;
+                beg++;
+                if(end-beg+1 > longestLength){
+                    longestLength = end-beg+1;
+                    longestBeg = beg;
+                    longestEnd = end+1;
+                }
+                break;
+            }
+        }
+        ind++;
+    }
+
+    if (longestEnd - longestBeg < 3) {
+    	return 'none';
+    }
+    return str.substring(longestBeg, longestEnd);
 
 }
    
 // keep this function call here 
-console.log(PalindromicSubstring(readline()));
+console.log(PalindromicSubstring("hellosannasmith"));
+console.log(PalindromicSubstring("abcdefgg"));
+
+// console.log(PalindromicSubstring(readline()));
