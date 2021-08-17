@@ -26,10 +26,38 @@
 
 function TreeConstructor(strArr) { 
 
-  // code goes here  
-  return strArr; 
+  // code goes here 
+  let parents = strArr.map(row => {
+    const nrow = row.replace(/\(|\)/g, '');
+    const columns = nrow.split(",");
+    return parseInt(columns[1]);
+  });
+
+  parents.sort((a, b) => a - b);
+
+  let nRepeat = 0;
+  pBefore = parents[0];
+
+  for (let i = 1; i < parents.length; i++) {
+    if (parents[i] == pBefore) {
+      nRepeat++;
+
+      if (nRepeat == 2) {
+        return false;
+      }
+    } else {
+      nRepeat = 0;
+      pBefore = parents[i];
+    }
+  }
+
+  return true; 
 
 }
    
 // keep this function call here 
-console.log(TreeConstructor(readline()));
+console.log(TreeConstructor(["(1,2)", "(2,4)", "(5,7)", "(7,2)", "(9,5)"]));
+console.log(TreeConstructor(["(1,2)", "(3,2)", "(2,12)", "(5,2)"]));
+console.log(TreeConstructor(["1,2", "3,2", "2,12", "5,2"]));
+console.log(TreeConstructor(["1,2", "3,2", "2,12", "5,3"]));
+// console.log(TreeConstructor(readline()));
