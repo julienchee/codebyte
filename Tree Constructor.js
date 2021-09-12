@@ -36,7 +36,7 @@ function TreeConstructor(strArr) {
   parents.sort((a, b) => a - b);
 
   let nRepeat = 0;
-  pBefore = parents[0];
+  let pBefore = parents[0];
 
   for (let i = 1; i < parents.length; i++) {
     if (parents[i] == pBefore) {

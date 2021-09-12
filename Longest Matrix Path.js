@@ -23,15 +23,15 @@
 // Output: 3
 
 function LongestMatrixPath(strArr) { 
-  var matrix = GetMatrixFromStringInput(strArr);
+  let matrix = GetMatrixFromStringInput(strArr);
 
   const yLength = matrix.length;
   const xLength = matrix[0].length;
 
   // Loop thru each integer, and find the next possible increasing path
   const paths = [];
-  for (x=0; x < xLength; x++) {
-    for (y=0; y < yLength; y++) {
+  for (let x=0; x < xLength; x++) {
+    for (let y=0; y < yLength; y++) {
       const eachNumber = matrix[y][x];
       const path = [eachNumber];
       FindNextIncrementalNumber(matrix, paths, path, x, y);
@@ -40,7 +40,7 @@ function LongestMatrixPath(strArr) {
   }
 
   const longestPath = paths.reduce(longestPathReducer);
-  return longestPath;
+  return longestPath.length - 1;
 }
 
 const longestPathReducer = (longestPath, currentPath) => {
@@ -92,7 +92,7 @@ function GetMatrixFromStringInput(strArr) {
   const rows = strArr.map(row => {
     const columns = row.split("");
     return columns.map(c => parseInt(c));
-  })
+  });
 
   return rows;
 }
@@ -112,7 +112,8 @@ function IsNewNumberBigger(matrix, x, y, biggestNumber) {
   return matrix[y][x] > biggestNumber;
 }
 
-console.log('Longest increasing path: ' + LongestMatrixPath(['994', '668', '211']).length);
+console.log(LongestMatrixPath(["12256", "56219", "43215"]));
+console.log(LongestMatrixPath(["67", "21", "45"]));
 console.log(LongestMatrixPath(['994', '668', '211']));
 
 // function LongestMatrixPath(strArr) { 
